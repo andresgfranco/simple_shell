@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/wait.h>
+#define GREEN_T "\x1b[32m"
+#define RESET_COLOR "\x1b[37m"
 
 #define DELIM " ,!¡¿?\'\"\n\t"
 char *_strcat(char *dest, char *src);
@@ -24,8 +26,7 @@ int main(int ac, char **av, char **envp)
                 char path[60] = "/bin/";
                 char path2[20] = "/sbin/";
                 if (isatty(STDOUT_FILENO) == 1)
-                        printf("$ ");
-                printf("%s", prompt);
+                        printf(GREEN_T "%s" RESET_COLOR, prompt);
 
                 getln = getline(&BUFFER, &bufsize, stdin);
                 if (getln == EOF)
