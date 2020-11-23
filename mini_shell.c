@@ -28,8 +28,8 @@ int main(int ac, char **av, char **envp)
 			_puts("\n");
 			exit(EXIT_SUCCESS);
 		}
-
 		token = strtok(buffer, DELIM);
+
 		mi_envp = _getpath("PATH");
 		mypath = _getenv("PATH");
 		while (token != NULL)
@@ -61,6 +61,8 @@ int main(int ac, char **av, char **envp)
        			}
        			exit(0);
        		}
+		else
+			child_pid = wait(NULL);
 		for (;reset <= i; reset ++)
 			token2[reset] = NULL;
 	}
