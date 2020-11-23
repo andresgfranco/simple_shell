@@ -14,8 +14,13 @@
 void _puts(char *str);
 int _putchar(char c);
 
-/**---Prototypes functions to execute---**/
+/**---Prototypes functions to handle PATH and environment variables---**/
+char **_getpath(const char *name);
+char *_getenv(const char *name);
 
+/**---Prototypes functions to handle strings---**/
+char *_strcat(char *dest, char *src);
+char *_strstr(char *haystack, const char *needle);
 
 /**---Color to our mini-shell :) ---**/
 #define GREEN_T "\x1b[32m"
@@ -23,5 +28,9 @@ int _putchar(char c);
 
 /**---Delimitator---**/
 #define DELIM " ,!¡¿?\'\"\n\t"
+
+/**---Global variable environ---**/
+extern char **environ;
+
 
 #endif
