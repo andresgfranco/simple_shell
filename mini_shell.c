@@ -32,7 +32,7 @@ int main(int ac, char **av, char **envp)
 			exit(EXIT_SUCCESS);
 		}
 		token = strtok(BUFFER, DELIM);
-		//newenviron();
+
 		mi_envp = _getpath("PATH");
 		mypath = _getenv("PAT");
 		while (token != NULL)
@@ -58,7 +58,7 @@ int main(int ac, char **av, char **envp)
 		if (child_pid == 0)
 		{
 			execve(_strcat(path, token2[0]), token2, NULL);
-			execve(_strcat(path2, token2[0]), token2, NULL);
+					execve(_strcat(path2, token2[0]), token2, NULL);
 			exit(0);
 		}
 		else
