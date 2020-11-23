@@ -1,4 +1,4 @@
-	#include "holberton.h"
+#include "holberton.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -79,12 +79,14 @@ int main(int ac, char **av, char **envp)
                 }
                 if (child_pid == 0)
                 {
+			if ((execve(token2[0], token2, NULL)) == -1)
+			{
 	               // execve(_strcat(path, token2[0]), token2, NULL);
                        // execve(_strcat(path2, token2[0]), token2, NULL);
 			executar(head, token2);
 			//free_list(head);
 			//head = NULL;
-			
+			}
                         printf("Hello World");
                 }
                 else

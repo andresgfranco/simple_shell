@@ -22,10 +22,6 @@ char *_getenv(const char *name);
 char *_strcat(char *dest, char *src);
 char *_strstr(char *haystack, const char *needle);
 
-/**---Color to our mini-shell :) ---**/
-#define GREEN_T "\x1b[32m"
-#define RESET_COLOR "\x1b[37m"
-
 /**---Delimitator---**/
 #define DELIM " ,!¡¿?\'\"\n\t"
 
