@@ -10,42 +10,39 @@
 
 int main(int ac, char **av, char **envp)
 {
-	char *prompt = "hola@shell$ ", *BUFFER;
+	char *prompt = "caribbean@shell$ ", *buffer, *token, *token2[1024], **mi_envp, *mypath,
+	     path[60] = "/bin/", path2[60] = "/sbin/";
 	size_t bufsize = 1024;
 	pid_t child_pid;
-	char *token = NULL, *token2[1024];
 	int reset, i, b;
 	unsigned int getln;
-	char **mi_envp, *mypath, path[60] = "/bin/", path2[60] = "/sbin/", *path_str;
 
 	while (1)
-	{
-		i = 0;
-		reset = 0;		
+	{	i = 0; reset = 0;
 		if (isatty(STDOUT_FILENO) == 1)
-			printf(GREEN_T "%s" RESET_COLOR, prompt);		
-		getln = getline(&BUFFER, &bufsize, stdin);
+			_puts(prompt);
+		getln = getline(&buffer, &bufsize, stdin);
 		if (getln == EOF)
 		{
-			printf("exit\n");
-			printf("\n");
+			_puts("exit\n");
+			_puts("\n");
 			exit(EXIT_SUCCESS);
 		}
-		token = strtok(BUFFER, DELIM);
+		token = strtok(buffer, DELIM);
 
 		mi_envp = _getpath("PATH");
-		mypath = _getenv("PAT");
+		mypath = _getenv("PATH");
 		while (token != NULL)
 		{
 			token2[i] = token;
 			token = strtok(NULL, DELIM);
 			i++;
-		}
+		}	
 		if (token2[0] != NULL)
 		{
 			if(strcmp(token2[0], "exit") == 0)
 			{
-				printf("\n-"); 
+				_puts("\n-"); 
 				exit(0);
 			}
 		}
@@ -56,11 +53,14 @@ int main(int ac, char **av, char **envp)
 			return (1);
 		}
 		if (child_pid == 0)
-		{
-			execve(_strcat(path, token2[0]), token2, NULL);
-					execve(_strcat(path2, token2[0]), token2, NULL);
-			exit(0);
-		}
+       		{
+			if (execve(token2[0], token2, NULL) == -1)
+       			{
+       				execve(_strcat(path, token2[0]), token2, NULL);
+       				execve(_strcat(path2, token2[0]), token2, NULL);
+       			}
+       			exit(0);
+       		}
 		else
 			child_pid = wait(NULL);
 		for (;reset <= i; reset ++)
