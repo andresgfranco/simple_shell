@@ -15,16 +15,15 @@ extern char **environ;
 int main(int ac, char **av, char **envp)
 {
 	 /*list_t i*head;
-
 	head = NULL;*/
-        char *prompt = "hola@shell$ ", *BUFFER;
+        char *prompt = "hola@shell$ ", *buffer;
         size_t bufsize = 1024;
         pid_t child_pid;
         char *token = NULL, *token2[1024];
         int reset, i, b;
         unsigned int getln;
 	char **mi_envp;
-	char *mypath;
+	char *mypath, **tokenized;
         while (1)
 	{
 		list_t *head;
@@ -35,40 +34,31 @@ int main(int ac, char **av, char **envp)
                 if (isatty(STDOUT_FILENO) == 1)
                         printf(GREEN_T "%s" RESET_COLOR, prompt);
 
-                getln = getline(&BUFFER, &bufsize, stdin);
+                getln = getline(&buffer, &bufsize, stdin);
                 if (getln == EOF)
                 {
                         printf("exit\n");
                         printf("\n");
                         exit(EXIT_SUCCESS);
                 }
-		/*for(b = 0; environ[b] != NULL; b++)
-			printf("{%s}\n", environ[b]);*/
 
-                token = strtok(BUFFER, DELIM);
-
-                while (token != NULL)
+                tokenized = tokenize(buffer);
+		
+                if (tokenized[0] != NULL)
                 {
-                        token2[i] = token;
-                        token = strtok(NULL, DELIM);
-                        i++;
-                }
-                if (token2[0] != NULL)
-                {
-                        if(strcmp(token2[0], "exit") == 0)
+                        if(strcmp(tokenized[0], "exit") == 0)
                         {
                                 printf("\n-"); 
                                 exit(0);
                         }
                 }
-		 
-		mi_envp = _getpath("path");
+
 		mypath = _getenv("PATH");
-		printf("%s\n", mypath);
+
 		printenv(&head, mypath);
 		
-		 if (token2[0] != NULL){
-		print_list(head,token2[0]);
+		 if (tokenized[0] != NULL){
+		print_list(head,tokenized[0]);
 		}
                 child_pid = fork();
 
@@ -79,49 +69,13 @@ int main(int ac, char **av, char **envp)
                 }
                 if (child_pid == 0)
                 {
-			if ((execve(token2[0], token2, NULL)) == -1)
+			if ((execve(tokenized[0], tokenized, NULL)) == -1)
 			{
-	               // execve(_strcat(path, token2[0]), token2, NULL);
-                       // execve(_strcat(path2, token2[0]), token2, NULL);
-			executar(head, token2);
-			//free_list(head);
-			//head = NULL;
+				executar(head, tokenized);
 			}
-                        printf("Hello World");
                 }
                 else
                         child_pid = wait(NULL);
-		//free_list(head);
-		//head = NULL;
-		//mypath = NULL;
-                for (;reset <= i; reset ++)
-		{
-			printf("hola\n");
-                       // token2[reset] = NULL;
-		}
         }
-	printf("hola");
         return (0);
 }
-/*
-char **newenviron(void)
-{
-	char **envp = environ;
-        int index = 0;
-	int count;
-        for(index = 0;environ[index] != NULL; index++) 
-	{
-        }
-
-	printf("---{%d}---", index);
-
-	har *path)    )); 
-	
-        for(count = 0; count < (index + 1); count++) 
-	{
-        ////      environ[count] = realloc(environ, sizeof(char) * (strlen(environ[count]) + 20));
-	}
-	printf("count----%d\n----", count);
-	return (environ);
-}
-*/

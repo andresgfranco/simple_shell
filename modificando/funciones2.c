@@ -56,9 +56,28 @@ char *_getenv(const char *name)
 	return NULL;
 }
 
-list_t  *printenv(list_t **head, char *path)
+char **_getpath(const char *name)
 {
-	//printf("printenv --- %s", path);
+	char **mi_envp;
+        int index = 0;
+	mi_envp = malloc(sizeof(char *) * (100));
+        for(index = 0;environ[index] != NULL; index++) 
+	{
+	}
+	mi_envp = malloc(sizeof(char *) * (index));
+
+
+        for(index = 0;environ[index] != NULL; index++) 
+	{
+                mi_envp[index] = (char *)malloc(sizeof(char) * (strlen(environ[index]) + 1));
+                memcpy(mi_envp[index], environ[index], strlen(environ[index]));
+	}
+	return (mi_envp);
+}
+
+list_t  *printenv(list_t *head, char *path)
+{
+	printf("printenv --- %s", path);
 	char *token;
 	int a = 0;
 	char *temp  =  malloc(sizeof(char ) * (strlen(path) + 1));
@@ -70,13 +89,11 @@ list_t  *printenv(list_t **head, char *path)
    /* walk through other tokens */
    while( token != NULL && a <= 20 ) 
 	{
-     // printf( "1 %s\n", token);
+      printf( "1 %s\n", token);
     	add_node_end(head, token);
-      	token = strtok(NULL, s);
+      token = strtok(NULL, s);
 	a++;
 	  }
-	free(temp);
-	return(*head);
 }
 
 list_t *add_node_end(list_t **head, char *str)
@@ -129,7 +146,7 @@ size_t print_list(const list_t *h, char *comando)
             	_strcat(h->str, "/");
 		_strcat(h->str, comando);
 	}
-           // printf("[%u] %s\n", h->len, h->str);
+            printf("[%u] %s\n", h->len, h->str);
         count += 1;
         h = h->next;
     }
@@ -144,13 +161,13 @@ void executar ( list_t *h, char **direcion)
     {
         if (h->str == NULL)
             printf("[%u] (nil)\n", h->len);
-	//printf("%s\n", h->str);
+	printf("%s\n", h->str);
 	execve(h->str, direcion, NULL);
         count += 1;
         h = h->next;
     }
 }
-void free_list(list_t *head)
+		void free_list(list_t *head)
 {
         list_t *tmp;
         if (head == NULL)
@@ -187,87 +204,7 @@ int _strlen(char *s)
 	int l;
 
 	for (l = 0; s[l] != '\0'; l++)
-		{
+	{
 	}
 	return (l);
-}
-void process_execution(int child_pid, char **tokenized, list_t *h)
-{
-	if (child_pid == -1)
-	{
-		_puts("Error");
-	}
-	if (child_pid == 0)
-	{
-		if ((execve(tokenized[0], tokenized, NULL)) == -1)
-		{
-		/*
-			execve(_strcat(path, tokenized[0]), tokenized, NULL);
-			execve(_strcat(path2, tokenized[0]), tokenized, NULL);
-		*/
-		executar(h, tokenized);
-		}
-	}
-	else
-		child_pid = wait(NULL);
-}
-void _puts(char *str)
-{
-	int i;
-
-	for (i = 0; str[i] != '\0'; i++)
-	{
-		_putchar(str[i]);
-	}
-}
-int _strcmp(char *s1, char *s2)
-{
-	int i;
-
-	for (i = 0; s1[i] == s2[i]; i++)
-		if (s1[i] == '\0')
-			return (0);
-	return (s1[i] - s2[i]);
-}
-int _putchar(char c)
-{
-		return (write(1, &c, 1));
-}
-void printerror(int error, char *command)
-{
-	if (error == 2)
-	{
-		_puts(command);
-		_puts(": No such file or directory\n");
-		exit(error);
-	}
-	if (error == 126)
-	{
-		_puts(command);
-		_puts(": Required key not available\n");
-		exit(error);
-	}
-	if (error == 127)
-	{
-		_puts(command);
-		_puts(": Key has expired\n");
-		exit(error);
-	}
-	if (error == 1)
-	{
-		_puts("exit\n");
-		_puts("\n");
-		exit(EXIT_SUCCESS);
-	}
-
-}
-void free_grid(char **grid)
-{
-	int i;
-
-	for (i = 0; grid[i] != NULL ; i++)
-	{
-		free(grid[i]);
-	}
-	free(grid);
 }
