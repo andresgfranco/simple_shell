@@ -10,61 +10,34 @@
 
 int main(int ac, char **av, char **envp)
 {
-	char *prompt = "caribbean@shell$ ", *buffer, *token, *token2[1024], **mi_envp, *mypath,
-	     path[60] = "/bin/", path2[60] = "/sbin/";
+	char *prompt = "caribbean@shell$ ", *buffer, *token, *token2[1024], *mypath,
+	     path[60] = "/bin/", path2[60] = "/sbin/", **tokenized;
 	size_t bufsize = 1024;
 	pid_t child_pid;
 	int reset, i, b;
 	unsigned int getln;
 
 	while (1)
-	{	i = 0; reset = 0;
+	{
+		i = 0;
+		reset = 0;
 		if (isatty(STDOUT_FILENO) == 1)
 			_puts(prompt);
 		getln = getline(&buffer, &bufsize, stdin);
 		if (getln == EOF)
-		{
-			_puts("exit\n");
-			_puts("\n");
-			exit(EXIT_SUCCESS);
-		}
-		token = strtok(buffer, DELIM);
-
-		mi_envp = _getpath("PATH");
+			printerror(1, NULL);
+		tokenized = tokenize(buffer);
 		mypath = _getenv("PATH");
-		while (token != NULL)
+
+		if (tokenized[0] == NULL || (_strcmp(tokenized[0], "exit") == 0))
 		{
-			token2[i] = token;
-			token = strtok(NULL, DELIM);
-			i++;
-		}	
-		if (token2[0] != NULL)
-		{
-			if(strcmp(token2[0], "exit") == 0)
-			{
-				_puts("\n-"); 
-				exit(0);
-			}
+			_puts("\n");
+			exit(0);
 		}
 		child_pid = fork();
-		if (child_pid == -1)
-		{
-			perror("Error");
-			return (1);
-		}
-		if (child_pid == 0)
-       		{
-			if (execve(token2[0], token2, NULL) == -1)
-       			{
-       				execve(_strcat(path, token2[0]), token2, NULL);
-       				execve(_strcat(path2, token2[0]), token2, NULL);
-       			}
-       			exit(0);
-       		}
-		else
-			child_pid = wait(NULL);
-		for (;reset <= i; reset ++)
-			token2[reset] = NULL;
+		process_execution(child_pid, tokenized, path, path2);
+		for (; reset <= i; reset++)
+			tokenized[reset] = NULL;
 	}
 	return (0);
 }

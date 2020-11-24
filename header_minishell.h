@@ -15,12 +15,16 @@ void _puts(char *str);
 int _putchar(char c);
 
 /**---Prototypes functions to handle PATH and environment variables---**/
-char **_getpath(const char *name);
 char *_getenv(const char *name);
+
+char **tokenize(char *buffer);
+void process_execution(int child_pid, char **tokenized, char *path, char *path2);
 
 /**---Prototypes functions to handle strings---**/
 char *_strcat(char *dest, char *src);
 char *_strstr(char *haystack, const char *needle);
+int _strlen(char *s);
+int _strcmp(char *s1, char *s2);
 
 /**---Delimitator---**/
 #define DELIM " ,!¡¿?\'\"\n\t"
@@ -28,5 +32,7 @@ char *_strstr(char *haystack, const char *needle);
 /**---Global variable environ---**/
 extern char **environ;
 
+/**---Function to print errors---**/
+void printerror(int error, char *command);
 
 #endif
