@@ -28,11 +28,11 @@ int _putchar(char c)
 }
 
 /**
-    * _strcat - function to concatenate strings
-      * @dest: destination string
-        * @src: source string
-	  * Return: pointer of concatenated string
-	  **/
+ * _strcat - function to concatenate strings
+ * @dest: destination string
+ * @src: source string
+ * Return: pointer of concatenated string
+ **/
 char *_strcat(char *dest, char *src)
 {
 	int a, b;
@@ -59,6 +59,7 @@ char *_strcat(char *dest, char *src)
 char *_strstr(char *haystack, const char *needle)
 {
 	char *c;
+
 	while (*haystack)
 	{
 		while (*needle == *haystack)
@@ -67,11 +68,11 @@ char *_strstr(char *haystack, const char *needle)
 		}
 		if (*needle == '\0')
 		{
-			if(*haystack == '=')
+			if (*haystack == '=')
 			{
 				haystack++;
 				c = haystack;
-				return c;
+				return (c);
 			}
 			return (NULL);
 		}

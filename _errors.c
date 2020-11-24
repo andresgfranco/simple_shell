@@ -2,6 +2,7 @@
 /**
   * printerror - function to print corresponding error
   * @error: number of error
+  * @command: command inputted
   * Return: void
 **/
 void printerror(int error, char *command)

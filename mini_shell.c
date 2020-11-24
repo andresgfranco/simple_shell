@@ -8,14 +8,14 @@
   * Return: 0 if success
 **/
 
-int main(int ac, char **av, char **envp)
+int main(int ac __attribute__((unused)), char **av __attribute__((unused)), char **envp __attribute__((unused)))
 {
-	char *prompt = "caribbean@shell$ ", *buffer, *token, *token2[1024], *mypath,
+	char *prompt = "caribbean@shell$ ", *buffer, *mypath,
 	     path[60] = "/bin/", path2[60] = "/sbin/", **tokenized;
 	size_t bufsize = 1024;
 	pid_t child_pid;
-	int reset, i, b;
-	unsigned int getln;
+	int reset, i;
+	int getln;
 
 	while (1)
 	{
@@ -28,7 +28,6 @@ int main(int ac, char **av, char **envp)
 			printerror(1, NULL);
 		tokenized = tokenize(buffer);
 		mypath = _getenv("PATH");
-
 		if (tokenized[0] == NULL || (_strcmp(tokenized[0], "exit") == 0))
 		{
 			_puts("\n");

@@ -18,7 +18,7 @@ int _putchar(char c);
 char *_getenv(const char *name);
 
 char **tokenize(char *buffer);
-void process_execution(int child_pid, char **tokenized, char *path, char *path2);
+void process_execution(int ch_pid, char **tokenized, char *path, char *path2);
 
 /**---Prototypes functions to handle strings---**/
 char *_strcat(char *dest, char *src);

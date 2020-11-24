@@ -10,15 +10,16 @@ char *_getenv(const char *name)
 {
 	char *mi_envp;
 	int index = 0;
-	while(environ[index] != '\0')
+
+	while (environ[index] != '\0')
 	{
 		mi_envp = _strstr(environ[index], name);
 		if (mi_envp == NULL)
 			index++;
 		else
-			return mi_envp;
+			return (mi_envp);
 	}
-	return NULL;
+	return (NULL);
 }
 
 /**
@@ -30,13 +31,13 @@ char **tokenize(char *buffer)
 {
 	int i;
 	char *token, **token2;
-	
+
 	token = strtok(buffer, DELIM);
 	token2 = malloc(sizeof(char *) * (30));
 
 	while (token != NULL)
 	{
-		token2[i] = (char*)malloc(sizeof(char) * (_strlen(token + 1)));
+		token2[i] = (char *)malloc(sizeof(char) * (_strlen(token + 1)));
 		token2[i] = token;
 		token = strtok(NULL, DELIM);
 		i++;
@@ -59,13 +60,21 @@ int _strlen(char *s)
 	return (l);
 }
 
-void process_execution(int child_pid, char **tokenized, char *path, char *path2)
+/**
+  * process_execution - function to run a child process
+  * @childpid: child pid after fork in main
+  * @tokenized: array of strings already tokenized
+  * @path: path
+  * @path2: path2
+  * Return: void
+**/
+void process_execution(int ch_pid, char **tokenized, char *path, char *path2)
 {
-	if (child_pid == -1)
+	if (ch_pid == -1)
 	{
 		_puts("Error");
 	}
-	if (child_pid == 0)
+	if (ch_pid == 0)
 	{
 		if ((execve(tokenized[0], tokenized, NULL)) == -1)
 		{
@@ -74,5 +83,5 @@ void process_execution(int child_pid, char **tokenized, char *path, char *path2)
 		}
 	}
 	else
-		child_pid = wait(NULL);
+		ch_pid = wait(NULL);
 }
