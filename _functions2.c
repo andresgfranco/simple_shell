@@ -29,22 +29,27 @@ char *_getenv(const char *name)
 **/
 char **tokenize(char *buffer)
 {
-	int i;
+	int words, i = 0;
 	char *token, **token2;
+	words = count_words(buffer);
+	if(words == 0)
+	{
+		return NULL;
+	}
 
 	token = strtok(buffer, DELIM);
-	token2 = malloc(sizeof(char *) * (30));
+	token2 = malloc(sizeof(char *) * (words + 1));
 
 	while (token != NULL)
 	{
-		token2[i] = (char *)malloc(sizeof(char) * (_strlen(token + 1)));
-		token2[i] = token;
+		token2[i] = malloc(sizeof(char) * (_strlen(token) + 1));
+		token2[i] = strcpy(token2[i], token);
 		token = strtok(NULL, DELIM);
 		i++;
 	}
+	token2[i] = NULL;
 	return (token2);
 }
-
 /**
  * _strlen - returns the lenght of a string
  * @s: string coming
@@ -61,27 +66,35 @@ int _strlen(char *s)
 }
 
 /**
-  * process_execution - function to run a child process
-  * @ch_pid: child pid after fork in main
-  * @tokenized: array of strings already tokenized
-  * @path: path
-  * @path2: path2
-  * Return: void
+ * execution - function to execute child process
+ * @tokeni: tokenized array
+ * @path: path
+ * Return: void
 **/
-void process_execution(int ch_pid, char **tokenized, char *path, char *path2)
-{
-	if (ch_pid == -1)
+void execution(char **tokeni, char *path)
+{	
+	char *token = NULL, *combinar = NULL, *temp = NULL;
+	const char s[2] = ":";
+	struct stat st;
+
+	if (stat(tokeni[0], &st) == 0)
 	{
-		_puts("Error");
-	}
-	if (ch_pid == 0)
-	{
-		if ((execve(tokenized[0], tokenized, NULL)) == -1)
-		{
-			execve(_strcat(path, tokenized[0]), tokenized, NULL);
-			execve(_strcat(path2, tokenized[0]), tokenized, NULL);
-		}
+		execve(tokeni[0], tokeni, NULL);
 	}
 	else
-		ch_pid = wait(NULL);
+	{
+		temp  =  malloc(sizeof(char ) * (_strlen(path) + 1));
+		temp = _strcpy(temp, path);
+		token = strtok(temp, s);
+		while( token != NULL )
+		{
+			combinar = malloc(sizeof(char) * (_strlen(token) + _strlen(tokeni[0]) + 2));
+			combinar = _strcpy(combinar, token);
+			combinar = _strcat(combinar, tokeni[0]);
+			execve(combinar, tokeni, NULL);
+			token = strtok(NULL, s);
+			free(combinar);
+		}
+		free(temp);
+	}
 }

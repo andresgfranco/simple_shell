@@ -40,6 +40,8 @@ char *_strcat(char *dest, char *src)
 	for (a = 0; dest[a] != '\0'; a++)
 	{
 	}
+	dest[a] = '/';
+	a++;
 	for (b = 0; src[b] != '\0'; b++)
 	{
 		dest[a] = src[b];
@@ -48,7 +50,6 @@ char *_strcat(char *dest, char *src)
 	dest[a] = '\0';
 	return (dest);
 }
-
 
 /**
  * _strstr - function to find a string within another string
