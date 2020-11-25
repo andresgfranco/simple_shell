@@ -8,9 +8,9 @@
   * Return: 0 if success
 **/
 
-int main(int ac __attribute__((unused)), char **av __attribute__((unused)), char **envp __attribute__((unused)))
+int main(int ac, char **av, char **envp)
 {
-	char *prompt = "caribbean@shell$ ", *buffer, *mypath,
+	char *prompt = "caribbean@shell$ ", *buffer, *mypath, 
 	     path[60] = "/bin/", path2[60] = "/sbin/", **tokenized;
 	size_t bufsize = 1024;
 	pid_t child_pid;
@@ -38,5 +38,8 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)), char
 		for (; reset <= i; reset++)
 			tokenized[reset] = NULL;
 	}
+	(void)ac;
+	(void)av;
+	(void)envp;
 	return (0);
 }
