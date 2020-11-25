@@ -34,7 +34,7 @@ void free_grid(char **grid)
 }
 
 /**
- * word_len - function to count number of letters of 
+ * word_len - function to count number of letters of
  * each word
  * @str: word
  * Return: number of letters of tje word

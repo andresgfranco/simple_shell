@@ -31,12 +31,12 @@ char **tokenize(char *buffer)
 {
 	int words, i = 0;
 	char *token, **token2;
-	words = count_words(buffer);
-	if(words == 0)
-	{
-		return NULL;
-	}
 
+	words = count_words(buffer);
+	if (words == 0)
+	{
+		return (NULL);
+	}
 	token = strtok(buffer, DELIM);
 	token2 = malloc(sizeof(char *) * (words + 1));
 
@@ -72,7 +72,7 @@ int _strlen(char *s)
  * Return: void
 **/
 void execution(char **tokeni, char *path)
-{	
+{
 	char *token = NULL, *combinar = NULL, *temp = NULL;
 	const char s[2] = ":";
 	struct stat st;
@@ -83,10 +83,10 @@ void execution(char **tokeni, char *path)
 	}
 	else
 	{
-		temp  =  malloc(sizeof(char ) * (_strlen(path) + 1));
+		temp  =  malloc(sizeof(char) * (_strlen(path) + 1));
 		temp = _strcpy(temp, path);
 		token = strtok(temp, s);
-		while( token != NULL )
+		while (token != NULL)
 		{
 			combinar = malloc(sizeof(char) * (_strlen(token) + _strlen(tokeni[0]) + 2));
 			combinar = _strcpy(combinar, token);

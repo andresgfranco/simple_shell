@@ -32,7 +32,7 @@ int main(int ac, char **av, char **envp)
 		mypath = _getenv("PATH");
 		child_pid = fork();
 		if (child_pid == -1)
-			return -1;
+			return (-1);
 		if (child_pid == 0)
 		{
 			execution(tokenized, mypath);
