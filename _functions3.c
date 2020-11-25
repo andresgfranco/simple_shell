@@ -17,7 +17,7 @@ char *_strcpy(char *dest, char *src)
 	return (dest);
 }
 
-/*
+/**
  * free_grid - function to free an array memory
  * @grid: array of strings
  * Return: void
