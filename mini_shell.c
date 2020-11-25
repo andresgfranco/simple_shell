@@ -10,7 +10,7 @@
 
 int main(int ac, char **av, char **envp)
 {
-	char *prompt = "caribbean@shell$ ", *buffer, *mypath, 
+	char *prompt = "caribbean@shell$ ", *buffer, /**mypath,*/
 	     path[60] = "/bin/", path2[60] = "/sbin/", **tokenized;
 	size_t bufsize = 1024;
 	pid_t child_pid;
@@ -27,7 +27,7 @@ int main(int ac, char **av, char **envp)
 		if (getln == EOF)
 			printerror(1, NULL);
 		tokenized = tokenize(buffer);
-		mypath = _getenv("PATH");
+		/*mypath = _getenv("PATH");*/
 		if (tokenized[0] == NULL || (_strcmp(tokenized[0], "exit") == 0))
 		{
 			_puts("\n");

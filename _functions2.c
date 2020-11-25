@@ -62,7 +62,7 @@ int _strlen(char *s)
 
 /**
   * process_execution - function to run a child process
-  * @childpid: child pid after fork in main
+  * @ch_pid: child pid after fork in main
   * @tokenized: array of strings already tokenized
   * @path: path
   * @path2: path2
