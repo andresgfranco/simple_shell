@@ -24,7 +24,6 @@ int main(int ac, char **av, char **envp)
 		if (getln == EOF)
 		{
 			free(buffer);
-			printerror(1, NULL);
 			exit(0);
 		}
 		tokenized = tokenize(buffer);
