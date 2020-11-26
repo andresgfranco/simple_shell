@@ -27,8 +27,6 @@ void printerror(int error, char *command)
 	}
 	if (error == 1)
 	{
-		_puts("exit\n");
-		_puts("\n");
 		exit(EXIT_SUCCESS);
 	}
 
