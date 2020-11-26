@@ -43,7 +43,7 @@ char **tokenize(char *buffer)
 	while (token != NULL)
 	{
 		token2[i] = malloc(sizeof(char) * (_strlen(token) + 1));
-		token2[i] = strcpy(token2[i], token);
+		token2[i] = _strcpy(token2[i], token);
 		token = strtok(NULL, DELIM);
 		i++;
 	}
