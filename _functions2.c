@@ -71,7 +71,7 @@ int _strlen(char *s)
  * @path: path
  * Return: void
 **/
-void execution(char **tokeni, char *path)
+char  *execution(char **tokeni, char *path)
 {
 	char *token = NULL, *combinar = NULL, *temp = NULL;
 	const char s[2] = ":";
@@ -79,7 +79,9 @@ void execution(char **tokeni, char *path)
 
 	if (stat(tokeni[0], &st) == 0)
 	{
-		execve(tokeni[0], tokeni, NULL);
+		combinar = malloc(sizeof(char) * (_strlen(tokeni[0]) + 1));
+		combinar = _strcpy(combinar, tokeni[0]);
+		return (combinar);
 	}
 	else
 	{
@@ -91,10 +93,14 @@ void execution(char **tokeni, char *path)
 			combinar = malloc(sizeof(char) * (_strlen(token) + _strlen(tokeni[0]) + 2));
 			combinar = _strcpy(combinar, token);
 			combinar = _strcat(combinar, tokeni[0]);
-			execve(combinar, tokeni, NULL);
+			if (stat(combinar, &st) == 0)
+			{
+				return (combinar);
+			}
 			token = strtok(NULL, s);
 			free(combinar);
 		}
 		free(temp);
 	}
+	return (NULL);
 }
