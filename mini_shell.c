@@ -12,7 +12,7 @@ int main(int ac, char **av, char **envp)
 {
 	char *prompt = "caribbean@shell$ ", *buffer = NULL, *mypath = NULL,
 	**tokenized = NULL;
-	size_t bufsize = 1024;
+	size_t bufsize = 0;
 	char *command = NULL;
 	int getln;
 
@@ -28,6 +28,10 @@ int main(int ac, char **av, char **envp)
 			exit(0);
 		}
 		tokenized = tokenize(buffer);
+		if(tokenized == NULL)
+		{
+			free(buffer);
+		}
 		if (tokenized[0] != NULL)
 		{
 			execucion2(tokenized, command, mypath, buffer);
