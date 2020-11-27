@@ -12,12 +12,12 @@ By learning how the shell works you will be able to understand how some of the C
 # Files in this repository
 - `README.md`
 - `mini_shell.c:` main file and function where we will have an infinite loop to receive a command.
-- `header_minishel.h:` unique header for the entire project containing libraries, function prototypes and macro delimitators
-- `_functions1.c:` first set of 4 functions used
-- `_function2.c:` second set of 5 instructions used
-- `_functions3.c:` third set of 5 instructions used
-- `_functions4.c:` fourth set of 5 instructions used
-- `_error.c:` file containing function to handle errors
+- `header_minishel.h:` unique header for the entire project containing libraries, function prototypes and macro delimitators.
+- `_functions1.c:` first set of 4 functions used.
+- `_function2.c:` second set of 5 instructions used.
+- `_functions3.c:` third set of 5 instructions used.
+- `_functions4.c:` fourth set of 5 instructions used.
+- `_error.c:` file containing function to handle errors.
 # Functions used in this repository
 - `isatty`
 - `write`
@@ -25,20 +25,20 @@ By learning how the shell works you will be able to understand how some of the C
 - `free`
 - `exit`
 ## Our own functions
-- `_getenv` - function to print the environment variable
-- `tokenize` - function to tokenize the command given
-- `_strlen` - returns the lenght of a string
-- `execution` - function that will copy the coincidence in the path to execute it in other function
-- `_strcpy` - copies the string pointed to by src, to the buffer
-- `free_grid` - function to free an array memory
-- `word_len` - function to count number of letters of each word
-- `count_words` - function to count number of words
-- `_puts` - prints a string
-- `_putchar` - writes the character c to stdout
-- `_strcat` - function to concatenate strings
-- `_strstr` - function to find a string within another string
-- `_strcmp` - compares two strings
-- `execucion2` - function that will create a child process and execute the command already found
+- `_getenv` - function to print the environment variable.
+- `tokenize` - function to tokenize the command given.
+- `_strlen` - returns the lenght of a string.
+- `execution` - function that will copy the coincidence in the path to execute it in other function.
+- `_strcpy` - copies the string pointed to by src, to the buffer.
+- `free_grid` - function to free an array memory.
+- `word_len` - function to count number of letters of each word.
+- `count_words` - function to count number of words.
+- `_puts` - prints a string.
+- `_putchar` - writes the character c to stdout.
+- `_strcat` - function to concatenate strings.
+- `_strstr` - function to find a string within another string.
+- `_strcmp` - compares two strings.
+- `execucion2` - function that will create a child process and execute the command already found.
 
 # Flowchart
 - 
