@@ -2,9 +2,6 @@
 /**
   * main - main function of our shell that will
   * receive the arguments in an infinite loop
-  * @ac: number of arguments
-  * @av: arguments
-  * @envp: environment variables
   * Return: 0 if success
 **/
 
@@ -13,8 +10,7 @@ int main(void)
 	char *prompt = "caribbean@shell$ ", *buffer = NULL, *mypath = NULL,
 	**tokenized = NULL, *command = NULL;
 	size_t bufsize = 0;
-	int writecount = 0;
-	int getln;
+	int writecount = 0, getln;
 
 	while (1)
 	{
@@ -25,6 +21,13 @@ int main(void)
 			exit(0);
 		}
 		getln = getline(&buffer, &bufsize, stdin);
+		if (getln == -1)
+		{
+			free(buffer);
+			if (isatty(STDIN_FILENO) != 0)
+				write(STDOUT_FILENO, "\n", 1);
+			exit(0);
+		}
 		if (getln == EOF)
 		{
 			free(buffer);
