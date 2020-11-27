@@ -8,22 +8,27 @@
   * Return: 0 if success
 **/
 
-int main(int ac, char **av, char **envp)
+int main(void)
 {
 	char *prompt = "caribbean@shell$ ", *buffer = NULL, *mypath = NULL,
-	**tokenized = NULL;
+	**tokenized = NULL, *command = NULL;
 	size_t bufsize = 0;
-	char *command = NULL;
+	int writecount = 0;
 	int getln;
 
 	while (1)
 	{
-		if (isatty(STDOUT_FILENO) == 1)
-			_puts(prompt);
+		if (isatty(STDIN_FILENO) == 1)
+		{
+			writecount = write(STDOUT_FILENO, prompt, 17);
+			if (writecount == -1)
+			exit(0);
+		}
 		getln = getline(&buffer, &bufsize, stdin);
 		if (getln == EOF)
 		{
 			free(buffer);
+			_puts("\n");
 			exit(0);
 		}
 		tokenized = tokenize(buffer);
@@ -40,10 +45,5 @@ int main(int ac, char **av, char **envp)
 			free(tokenized);
 		}
 	}
-	(void)ac;
-	(void)tokenized;
-	(void)av;
-	(void)envp;
-	(void)*prompt;
 	return (0);
 }
