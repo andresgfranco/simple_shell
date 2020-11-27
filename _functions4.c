@@ -1,4 +1,5 @@
 #include "header_minishell.h"
+
 /**
  * execucion2 - This functios work
  * @tokenized: This is the arguments in a array of the strings
@@ -30,7 +31,7 @@ void execucion2(char **tokenized, char *command, char *mypath, char *buffer)
 		}
 		if (child_pid == 0)
 		{
-		execve(command, tokenized, NULL);
+		execve(command, tokenized, environ);
 		}
 	}
 	wait(&status);
