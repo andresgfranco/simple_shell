@@ -73,15 +73,15 @@ int _strlen(char *s)
 **/
 char  *execution(char **tokeni, char *path)
 {
-	char *token = NULL, *combinar = NULL, *temp = NULL;
+	char *token = NULL, *combine = NULL, *temp = NULL;
 	const char s[2] = ":";
 	struct stat st;
 
 	if (stat(tokeni[0], &st) == 0)
 	{
-		combinar = malloc(sizeof(char) * (_strlen(tokeni[0]) + 1));
-		combinar = _strcpy(combinar, tokeni[0]);
-		return (combinar);
+		combine = malloc(sizeof(char) * (_strlen(tokeni[0]) + 1));
+		combine = _strcpy(combine, tokeni[0]);
+		return (combine);
 	}
 	else
 	{
@@ -90,20 +90,17 @@ char  *execution(char **tokeni, char *path)
 		token = strtok(temp, s);
 		while (token != NULL)
 		{
-			combinar = malloc(sizeof(char) * (_strlen(token) + _strlen(tokeni[0]) + 2));
-			combinar = _strcpy(combinar, token);
-			combinar = _strcat(combinar, tokeni[0]);
-			if (stat(combinar, &st) == 0)
+			combine = malloc(sizeof(char) * (_strlen(token) + _strlen(tokeni[0]) + 2));
+			combine = _strcpy(combine, token);
+			combine = _strcat(combine, tokeni[0]);
+			if (stat(combine, &st) == 0)
 			{
-				return (combinar);
+				return (combine);
 			}
 			token = strtok(NULL, s);
-			free(combinar);
+			free(combine);
 		}
 		free(temp);
 	}
-	
-	/* printerror(1, tokeni);
-	free(tokeni);*/
 	return (NULL);
 }

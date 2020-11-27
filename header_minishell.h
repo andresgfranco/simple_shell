@@ -23,7 +23,7 @@ char **tokenize(char *buffer);
 /*void execution(char **tokeni, char *path);*/
 void free_grid(char **grid);
 char  *execution(char **tokeni, char *path);
-void execucion2(char **tokenized, char *comando, char *mypath, char *buffer);
+void execution2(char **tokenized, char *comando, char *mypath, char *buffer);
 /**---Prototypes functions to handle strings---**/
 char *_strcat(char *dest, char *src);
 char *_strstr(char *haystack, const char *needle);

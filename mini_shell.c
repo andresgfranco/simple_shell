@@ -28,25 +28,13 @@ int main(void)
 				write(STDOUT_FILENO, "\n", 1);
 			exit(0);
 		}
-		if (getln == EOF)
-		{
-			free(buffer);
-			_puts("\n");
-			exit(0);
-		}
 		tokenized = tokenize(buffer);
-		if(tokenized == NULL)
-		{
-			free(buffer);
-		}
 		if (tokenized[0] != NULL)
 		{
-			execucion2(tokenized, command, mypath, buffer);
+			execution2(tokenized, command, mypath, buffer);
 		}
 		else
-		{
 			free(tokenized);
-		}
 	}
 	return (0);
 }
