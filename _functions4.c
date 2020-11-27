@@ -33,6 +33,7 @@ void execucion2(char **tokenized, char *command, char *mypath, char *buffer)
 		{
 		execve(command, tokenized, environ);
 		}
+		free(command);
 	}
 	wait(&status);
 	if (WIFEXITED(status))
