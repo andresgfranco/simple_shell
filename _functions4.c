@@ -11,7 +11,7 @@
 
 void execucion2(char **tokenized, char *command, char *mypath, char *buffer)
 {
-	int child_pid = 0, status, exitstatus = 0;
+	int child_pid = 0, status = 0, exitstatus = 0;
 
 	if (tokenized[0] != NULL && (_strcmp(tokenized[0], "exit") == 0))
 	{
@@ -34,11 +34,12 @@ void execucion2(char **tokenized, char *command, char *mypath, char *buffer)
 		execve(command, tokenized, environ);
 		}
 		free(command);
-	}
+	
 	wait(&status);
 	if (WIFEXITED(status))
 	{
 		exitstatus = WEXITSTATUS(status);
+	}
 	}
 	(void) exitstatus;
 	free_grid(tokenized);
