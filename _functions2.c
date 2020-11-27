@@ -102,5 +102,8 @@ char  *execution(char **tokeni, char *path)
 		}
 		free(temp);
 	}
+	
+	/* printerror(1, tokeni);
+	free(tokeni);*/
 	return (NULL);
 }

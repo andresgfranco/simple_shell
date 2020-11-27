@@ -35,12 +35,14 @@ void execucion2(char **tokenized, char *command, char *mypath, char *buffer)
 		}
 		free(command);
 	
-	wait(&status);
-	if (WIFEXITED(status))
-	{
+		wait(&status);
+		if (WIFEXITED(status))
+		{
 		exitstatus = WEXITSTATUS(status);
+		}
 	}
-	}
-	(void) exitstatus;
+	else
+		printerror(2, tokenized);	
+	(void)exitstatus;
 	free_grid(tokenized);
 }

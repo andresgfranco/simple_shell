@@ -40,6 +40,6 @@ int count_words(char *str);
 extern char **environ;
 
 /**---Function to print errors---**/
-void printerror(int error, char *command);
+void printerror(int error, char **command);
 
 #endif
