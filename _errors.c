@@ -10,7 +10,7 @@ void printerror(int error, char **command)
 	if (error == 2)
 	{
 		_puts(command[0]);
-		_puts(": No such file or directory\n");
+		_puts(": command not found\n");
 	}
 	if (error == 126)
 	{
