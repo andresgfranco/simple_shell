@@ -41,7 +41,7 @@ By learning how the shell works you will be able to understand how some of the C
 - `execucion2` - function that will create a child process and execute the command already found.
 
 # Flowchart
-- [![Flowchart_simple_shell](https://github.com/andresgfranco/simple_shell/Flowchart - mini_shell.jpg "Flowchart_simple_shell")](https://github.com/andresgfranco/simple_shell/Flowchart - mini_shell.jpg "Flowchart_simple_shell") 
+- [![Flowchart_simple_shell](https://github.com/andresgfranco/simple_shell/Flowchart_-_mini_shell.jpg "Flowchart_simple_shell")](https://github.com/andresgfranco/simple_shell/Flowchart_-_mini_shell.jpg "Flowchart_simple_shell") 
 # Authors
 - Andres Campo Serna - http://twitter.com/campoandres98
 - Andres Gonzalez Franco - http://twitter.com/andresgfranco
